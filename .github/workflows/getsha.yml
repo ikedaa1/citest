@@ -1,0 +1,16 @@
+name: Sha test
+on: 
+  push:
+    branches:
+      - main 
+
+jobs:
+  get-sha:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: echo sha
+        env:
+          SHA: ${{ github.sha }}
+        run: |
+          echo $SHA
