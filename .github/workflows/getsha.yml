@@ -1,8 +1,10 @@
 name: Sha test
-on: 
+on:
   push:
     branches:
-      - main 
+      - main
+    tags:
+      - v**
 
 jobs:
   get-sha:
