@@ -1,8 +1,7 @@
 name: Sha test tag
 on:
-  push:
-    tags:
-      - v*
+  release:
+    types: [published]
 
 jobs:
   get-sha:
