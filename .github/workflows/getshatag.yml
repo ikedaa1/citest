@@ -13,3 +13,4 @@ jobs:
           SHA: ${{ github.sha }}
         run: |
           echo $SHA
+          echo $GITHUB_REF
