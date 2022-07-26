@@ -1,6 +1,6 @@
 name: Sha test tag
 on:
-  push:
+  create:
     tags:
       - "v*"
 
