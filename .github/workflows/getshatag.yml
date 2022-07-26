@@ -2,7 +2,7 @@ name: Sha test tag
 on:
   push:
     tags:
-      - "v**"
+      - "v*"
 
 jobs:
   get-sha:
