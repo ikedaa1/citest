@@ -1,0 +1,22 @@
+name: Get ref on pull request
+on:
+  pull_request:
+    branches:
+      - main
+
+jobs:
+  get-sha:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v2
+      - name: echo sha
+        env:
+          SHA: ${{ github.sha }}
+        run: |
+          echo $SHA
+          echo $GITHUB_REF | tee comments.txt
+      - name: Post comments
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          URL: ${{ github.event.pull_request.html_url }}
+        run: gh pr comment -F ./comments.txt "${URL}"
