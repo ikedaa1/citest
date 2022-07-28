@@ -6,7 +6,7 @@ on:
 jobs:
   get-sha:
     runs-on: ubuntu-latest
-    if: github.ref = 'refs/tags/v*'
+    if: github.ref == 'refs/tags/v*'
     steps:
       - uses: actions/checkout@v2
       - name: echo sha
