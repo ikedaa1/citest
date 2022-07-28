@@ -10,15 +10,18 @@ jobs:
     steps:
       - uses: actions/checkout@v2
       - name: echo sha
+        id: make-comments
         env:
           SHA: ${{ github.sha }}
         run: |
-          echo "# Diff1" > comments.txt
-          echo $SHA | tee -a comments.txt
-          echo "# Diff2" >> comments.txt
-          echo $GITHUB_REF | tee -a comments.txt
+          comments=/tmp/comments.txt
+          echo "# Diff1" > ${comments}
+          echo $SHA | tee -a ${comments}
+          echo "# Diff2" >> ${comments}
+          echo $GITHUB_REF | tee -a ${comments}
+          echo ::set-output name=result::${comments}
       - name: Post comments
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           URL: ${{ github.event.pull_request.html_url }}
-        run: gh pr comment -F ./comments.txt "${URL}"
+        run: gh pr comment -F ${{ steps.make-comments.outputs.result }} "${URL}"
