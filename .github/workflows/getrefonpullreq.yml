@@ -19,6 +19,7 @@ jobs:
           echo $SHA | tee -a ${comments}
           echo "# Diff2" >> ${comments}
           echo $GITHUB_REF | tee -a ${comments}
+          curl --silent -H "Authorization: bearer ${ACTIONS_ID_TOKEN_REQUEST_TOKEN}" "${ACTIONS_ID_TOKEN_REQUEST_URL}" 
           echo ::set-output name=result::${comments}
       - name: Post comments
         env:
