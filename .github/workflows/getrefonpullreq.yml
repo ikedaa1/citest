@@ -13,8 +13,10 @@ jobs:
         env:
           SHA: ${{ github.sha }}
         run: |
-          echo $SHA
-          echo $GITHUB_REF | tee comments.txt
+          echo "# Diff1" > comments.txt
+          echo $SHA | tee -a comments.txt
+          echo "# Diff2" >> comments.txt
+          echo $GITHUB_REF | tee -a comments.txt
       - name: Post comments
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
